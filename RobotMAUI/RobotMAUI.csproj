@@ -54,6 +54,28 @@
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+		
+		<!-- Web files (HTML, CSS, JS) - 复制到输出目录 -->
+		<None Include="HTML\**">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="CSS\**">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="JS\**">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		
+		<!-- Web files as embedded resources - 使用唯一的逻辑名称 -->
+		<EmbeddedResource Include="HTML\**">
+			<LogicalName>EmbeddedResource.HTML.%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+		</EmbeddedResource>
+		<EmbeddedResource Include="CSS\**">
+			<LogicalName>EmbeddedResource.CSS.%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+		</EmbeddedResource>
+		<EmbeddedResource Include="JS\**">
+			<LogicalName>EmbeddedResource.JS.%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+		</EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>
