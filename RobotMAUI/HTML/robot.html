@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
   <title>Robot Animation</title>
   <!-- CSS样式 -->
   <style>
@@ -15,6 +15,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      touch-action: none; /* 禁止触摸操作，防止拖动 */
     }
     #webgl {
       width: 100vw;
@@ -214,5 +215,95 @@
   <!-- 引用JS文件 -->
   <script src="../JS/background.js"></script>
   <script src="../JS/robot.js"></script>
+
+  <script>
+    function appendMessage(role, content) {
+      const chatContainer = document.getElementById('chat-container');
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${role}`;
+      messageDiv.textContent = content;
+      chatContainer.appendChild(messageDiv);
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+  </script>
+
+  <style>
+    #chat-container {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      width: 300px;
+      max-height: 400px;
+      overflow-y: auto;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      z-index: 1000; /* 确保聊天窗口在最上层 */
+    }
+
+    .message {
+      margin: 5px;
+      padding: 10px;
+      border-radius: 10px;
+      max-width: 80%;
+      word-wrap: break-word; /* 确保长文本能够换行 */
+    }
+
+    .user {
+      background: #e3f2fd;
+      margin-left: auto;
+    }
+
+    .assistant {
+      background: #f5f5f5;
+      margin-right: auto;
+    }
+
+    /* 媒体查询，针对移动设备优化 */
+    @media (max-width: 768px) {
+      #chat-container {
+        width: 80%; /* 在小屏幕上占据更多宽度 */
+        max-height: 300px; /* 减小高度以适应小屏幕 */
+        bottom: 70px; /* 调整位置 */
+        right: 10px;
+        left: 10px; /* 添加左侧定位 */
+        margin: 0 auto; /* 水平居中 */
+      }
+    }
+  </style>
+
+  <div id="chat-container"></div>
+
+  <script>
+    // 添加移动设备检测
+    function isMobileDevice() {
+      return (window.innerWidth <= 768) ||
+             (navigator.userAgent.match(/Android/i) ||
+              navigator.userAgent.match(/webOS/i) ||
+              navigator.userAgent.match(/iPhone/i) ||
+              navigator.userAgent.match(/iPad/i) ||
+              navigator.userAgent.match(/iPod/i) ||
+              navigator.userAgent.match(/BlackBerry/i) ||
+              navigator.userAgent.match(/Windows Phone/i));
+    }
+
+    // 页面加载完成后执行
+    document.addEventListener('DOMContentLoaded', function() {
+      if (isMobileDevice()) {
+        // 禁用页面滚动和缩放
+        document.addEventListener('touchmove', function(e) {
+          e.preventDefault();
+        }, { passive: false });
+
+        // 调整聊天容器位置
+        const chatContainer = document.getElementById('chat-container');
+        if (chatContainer) {
+          chatContainer.style.position = 'fixed';
+          chatContainer.style.zIndex = '1000';
+        }
+      }
+    });
+  </script>
 </body>
 </html>

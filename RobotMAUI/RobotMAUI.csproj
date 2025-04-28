@@ -24,7 +24,7 @@
 		<ApplicationTitle>RobotMAUI</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.robotmaui</ApplicationId>
+		<ApplicationId>com.yourcompany.robotmaui</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -55,7 +55,12 @@
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 		
-		<!-- Web files (HTML, CSS, JS) - 复制到输出目录 -->
+		<!-- Web files for Android -->
+		<AndroidAsset Include="HTML\**" />
+		<AndroidAsset Include="CSS\**" />
+		<AndroidAsset Include="JS\**" />
+		
+		<!-- Keep existing web files handling for other platforms -->
 		<None Include="HTML\**">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
@@ -66,7 +71,7 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		
-		<!-- Web files as embedded resources - 使用唯一的逻辑名称 -->
+		<!-- Embedded resources -->
 		<EmbeddedResource Include="HTML\**">
 			<LogicalName>EmbeddedResource.HTML.%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
 		</EmbeddedResource>
