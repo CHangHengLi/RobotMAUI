@@ -1,6 +1,8 @@
 # RobotMAUI - 智能机器人控制平台
 
 欢迎访问RobotMAUI项目页面！这是一个基于.NET MAUI技术的跨平台机器人控制系统。
+![image](https://github.com/user-attachments/assets/82245431-718f-4c67-85f5-408675bf67b6)
+
 
 ## 项目概述
 RobotMAUI是一个创新的跨平台应用程序，专为机器人控制和监控设计。无论您使用Windows、Android还是iOS设备，都能方便地远程操控和查看机器人状态。
